@@ -33,13 +33,16 @@ public class CarteiraService
 	{
 		List<Ativo> ativos = carteira.getAtivos();
 		
-		Ativo ativo = tx.getAtivo();
+		String siglaAtivo = tx.getAtivo().getSigla();
 		
-		if (!ativos.contains(ativo))
+		for (Ativo ativo : ativos) 
 		{
-			ativos.add(ativo);
+			if (ativo.getSigla().equals(siglaAtivo))
+				return ativo;
 		}	
 		
+		Ativo ativo = new Ativo(siglaAtivo,0d,0d,0d);
+		ativos.add(ativo);
 		return ativo;
 	}
 	
