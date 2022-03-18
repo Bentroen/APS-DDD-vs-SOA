@@ -1,11 +1,13 @@
 package br.cefetrj.aps.crypto.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import br.cefetrj.aps.crypto.dao.CarteiraDao;
 import br.cefetrj.aps.crypto.domain.Ativo;
 import br.cefetrj.aps.crypto.domain.Carteira;
 import br.cefetrj.aps.crypto.domain.Transacao;
+import br.cefetrj.aps.crypto.utils.DateUtils;
 
 public class CarteiraService 
 {
@@ -16,10 +18,10 @@ public class CarteiraService
 	
 	public void processarTransacao(Carteira carteira,Transacao tx) // SUPER HIPER COMPLEXO!!! 
 	{
-		// 1 - recuperar ou criar o ativo que est· sendo transacionando
+		// 1 - recuperar ou criar o ativo que est√° sendo transacionando
 		Ativo ativo = recuperarAtivo(carteira,tx);
 		
-		// 2 - atualizar o saldo do ativo pela transaÁ„o
+		// 2 - atualizar o saldo do ativo pela transa√ß√£o
 		processarAtivo(ativo,tx);
 		
 		// 3 - atualizar o saldo total da carteira
@@ -41,7 +43,7 @@ public class CarteiraService
 				return ativo;
 		}	
 		
-		Ativo ativo = new Ativo(siglaAtivo,0d,0d,0d);
+		Ativo ativo = new Ativo(siglaAtivo,0d,0d,0d, DateUtils.parse("2022-02-04 11:00:00"));
 		ativos.add(ativo);
 		return ativo;
 	}
@@ -53,6 +55,8 @@ public class CarteiraService
 			double qtdComprada = tx.getQuantidade();
 			double precoPago   = tx.getPrecoPago();
 			double valorPago   = qtdComprada*precoPago;			
+			LocalDateTime dataTrans = tx.getData();
+			
 			
 			double qtdPossuida   = ativo.getQuantidade();
 			double precoEntrada  = ativo.getPrecoEntrada();
@@ -63,7 +67,8 @@ public class CarteiraService
 			double novoPrecoEntrada = novoValorTotal / novaQuantidade;
 			
 			ativo.setQuantidade(novaQuantidade);
-			ativo.setPrecoEntrada(novoPrecoEntrada);			
+			ativo.setPrecoEntrada(novoPrecoEntrada);	
+			ativo.setData(dataTrans);
 		}
 		else
 		{
