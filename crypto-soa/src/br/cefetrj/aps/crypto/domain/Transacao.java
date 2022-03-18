@@ -23,12 +23,13 @@ public class Transacao
 	
 	public String toString()
 	{
-		return String.format("%s - [%s] %s (Quantidade - %s) (Preco - %s)",
-							 DateUtils.format(data),
+		return String.format("%s - [%s] %s (Quantidade - %s) (Preco - %s) (Data - %s)",
+			
 							 compra?"COMPRA":"VENDA",
 							 ativo.getSigla(),
 							 quantidade,
-							 precoPago);
+							 precoPago,
+							 data);
 	}
 	
 	public Ativo getAtivo() {
