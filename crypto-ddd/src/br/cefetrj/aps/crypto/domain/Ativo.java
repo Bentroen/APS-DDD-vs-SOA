@@ -1,8 +1,11 @@
 package br.cefetrj.aps.crypto.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
-public class Ativo implements Serializable{
+import br.cefetrj.aps.crypto.utils.NumberUtils;
+
+public class Ativo implements Serializable {
     private String sigla;
     private double quantidade;
     private double precoEntrada;
@@ -19,12 +22,12 @@ public class Ativo implements Serializable{
         Ativo destino = tf.getDestino().getAtivo(tf.getAtivo().getSigla());
         Ativo origem = tf.getOrigem().getAtivo(tf.getAtivo().getSigla());
 
-        if(destino == null){
+        if (destino == null) {
             destino = new Ativo(tf.getAtivo().getSigla(), 0, 0, 0);
             tf.getDestino().getAtivos().add(destino);
         }
 
-        if(origem == null){
+        if (origem == null) {
             origem = new Ativo(tf.getAtivo().getSigla(), 0, 0, 0);
             tf.getOrigem().getAtivos().add(origem);
         }
@@ -75,12 +78,12 @@ public class Ativo implements Serializable{
     public String toString() {
         StringBuilder sb = new StringBuilder("Ativo: ");
         sb.append(sigla);
-        sb.append("Quantidade: ");
-        sb.append(quantidade);
-        sb.append("Preço entrada: ");
-        sb.append(precoEntrada);
-        sb.append("Preço atual: ");
-        sb.append(precoAtual);
+        sb.append(" Quantidade: ");
+        sb.append(NumberFormat.getInstance().format(quantidade));
+        sb.append(" Preço entrada: ");
+        sb.append(NumberUtils.formatUsd(precoEntrada));
+        sb.append(" Preço atual: ");
+        sb.append(NumberUtils.formatUsd(precoAtual));
         return sb.toString();
     }
 

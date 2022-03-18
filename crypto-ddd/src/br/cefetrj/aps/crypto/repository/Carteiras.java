@@ -22,8 +22,10 @@ public class Carteiras implements Serializable {
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 singleton = (Carteiras) ois.readObject();
                 ois.close();
+                System.out.println("Carteiras loaded from file");
             } catch (Exception e) {
                 singleton = this;
+                System.out.println("New carteiras.db");
             }
         }
     }
@@ -41,6 +43,9 @@ public class Carteiras implements Serializable {
     }
 
     public void salvar(Carteira carteira) {
+        if (carteiras.contains(carteira)) {
+            return;
+        }
         this.carteiras.add(carteira);
         escreverDados();
     }

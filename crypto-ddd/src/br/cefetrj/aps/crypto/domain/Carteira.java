@@ -65,14 +65,15 @@ public class Carteira implements Comparable<Carteira>, Serializable {
         StringBuilder builder = new StringBuilder();
 
         builder.append("#### CARTEIRA ####\n");
-        builder.append("Entrada Total: ");
-        builder.append(NumberUtils.formatUsd(entradaTotal) + "\n");
+        builder.append("ID: ").append(id).append("\n");
+        builder.append("ENTRADA TOTAL: ").append(NumberUtils.format(entradaTotal)).append("\n");
+        builder.append("SALDO TOTAL: ").append(NumberUtils.format(saldoTotal)).append("\n");
+        builder.append("ATIVOS:\n");
         builder.append("------------------\n");
         for (Ativo ativo : ativos) {
-            builder.append(ativo.toString());
+            builder.append(ativo);
             builder.append("\n");
         }
-
         return builder.toString();
     }
 
