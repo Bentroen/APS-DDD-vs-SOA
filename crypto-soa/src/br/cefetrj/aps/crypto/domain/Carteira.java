@@ -1,5 +1,6 @@
 package br.cefetrj.aps.crypto.domain;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Carteira implements Comparable<Carteira>
 	private String id;
 	private double entradaTotal;
 	private double saldoTotal;
+	private LocalDateTime data;
 	
 	private List<Ativo> ativos = new ArrayList<Ativo>();
 	
@@ -18,13 +20,18 @@ public class Carteira implements Comparable<Carteira>
 		StringBuilder builder = new StringBuilder();
 		
 		builder.append("#### CARTEIRA ####\n");
+		builder.append("ID: ");
+		builder.append((id)+"\n");
+		
 		builder.append("Entrada Total: ");
 		builder.append(NumberUtils.formatUsd(entradaTotal)+"\n");
+		
 		builder.append("------------------\n");
 		for (Ativo ativo : ativos) 
 		{
 			builder.append(ativo.toString());
 			builder.append("\n");
+		
 		}		
 		
 		return builder.toString();
@@ -61,6 +68,13 @@ public class Carteira implements Comparable<Carteira>
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public LocalDateTime getData() {
+		return data;
+	}
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
 
 	@Override
 	public int compareTo(Carteira other) 
@@ -93,3 +107,4 @@ public class Carteira implements Comparable<Carteira>
 		return true;
 	}
 }
+
