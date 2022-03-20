@@ -72,7 +72,21 @@ public class CarteiraService
 		}
 		else
 		{
-			// TODO ...
+            double qtdVendida = tx.getQuantidade();
+            double precoVendido = tx.getPrecoPago();
+            double valorVendido = qtdVendida*precoVendido;
+            
+            double qtdPossuida   = ativo.getQuantidade();
+            double precoEntrada  = ativo.getPrecoEntrada();
+            double valorPossuido = qtdPossuida*precoEntrada;
+            
+            double novoValorTotal   = valorPossuido - valorVendido;
+            double novaQuantidade   = qtdPossuida - qtdVendida;
+            double novoPrecoEntrada = novoValorTotal / novaQuantidade;
+            
+            ativo.setQuantidade(novaQuantidade);
+            ativo.setPrecoEntrada(novoPrecoEntrada);	
+            ativo.setData(tx.getData());
 		}
 	}
 	
