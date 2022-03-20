@@ -1,24 +1,28 @@
 package br.cefetrj.aps.crypto.domain;
 
+import java.time.LocalDateTime;
+
 public class Ativo
 {
 	private String sigla;
 	private double quantidade;
 	private double precoEntrada;
 	private double precoAtual;
+	private LocalDateTime data;
 	
-	public Ativo(String sigla, double quantidade, double precoEntrada, double precoAtual) 
+	public Ativo(String sigla, double quantidade, double precoEntrada, double precoAtual, LocalDateTime data) 
 	{
 		this.sigla = sigla;
 		this.quantidade = quantidade;
 		this.precoEntrada = precoEntrada;
 		this.precoAtual = precoAtual;
+		this.data = data;
 	}
 	
 	public String toString()
 	{
-		return String.format("[%s] %s (Entrada - %s) (Atual - %s)",
-							 sigla,quantidade,precoEntrada,precoAtual);
+		return String.format("[%s] %s (Entrada - %s) (Atual - %s) (Data ultima movimentação- %s)",
+							 sigla,quantidade,precoEntrada,precoAtual,data);
 	}
 	
 	public String getSigla() {
@@ -44,5 +48,11 @@ public class Ativo
 	}
 	public void setPrecoAtual(double precoAtual) {
 		this.precoAtual = precoAtual;
+	}
+	public LocalDateTime getData() {
+		return data;
+	}
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 }

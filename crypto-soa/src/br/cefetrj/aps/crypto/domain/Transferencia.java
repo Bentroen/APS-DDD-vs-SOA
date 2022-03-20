@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import br.cefetrj.aps.crypto.utils.DateUtils;
 
-public class Transacao 
+public class Transferencia
 {
 	private Ativo ativo;
 	private boolean compra;
@@ -12,7 +12,7 @@ public class Transacao
 	private double precoPago;
 	private LocalDateTime data;
 	
-	public Transacao(Ativo ativo, boolean compra, double quantidade, double precoPago, LocalDateTime data) 
+	public Transferencia(Ativo ativo, boolean compra, double quantidade, double precoPago, LocalDateTime data) 
 	{
 		this.ativo = ativo;
 		this.compra = compra;
